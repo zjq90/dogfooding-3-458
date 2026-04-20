@@ -1,0 +1,93 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  application:
+    name: zsy-spring-boot
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./data/zsy_db;DB_CLOSE_DELAY=-1;AUTO_RECONNECT=TRUE;INIT=RUNSCRIPT FROM 'classpath:sql/init.sql' IF NOT EXISTS
+    username: sa
+    password:
+    druid:
+      initial-size: 2
+      max-active: 50
+      max-wait: 60000
+      min-idle: 5
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      remove-abandoned: true
+      remove-abandoned-timeout-millis: 180000
+      connection-properties: clientEncoding=UTF-8
+      filters: stat,wall
+      filter:
+        stat:
+          slow-sql-millis: 10000
+          log-slow-sql: true
+          merge-sql: true
+      web-stat-filter:
+        enabled: true
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 5MB
+      max-request-size: 5MB
+      resolve-lazily: true
+
+  quartz:
+    job-store-type: memory
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: QuartzScheduler
+          threadPool:
+            threadCount: 10
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.zoushiyou.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    lazy-loading-enabled: true
+
+pagehelper:
+  helper-dialect: h2
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+  auto-runtime-dialect: true
+
+logging:
+  level:
+    root: INFO
+    com.zoushiyou: DEBUG
+    org.springframework: WARN
+    org.mybatis: DEBUG
