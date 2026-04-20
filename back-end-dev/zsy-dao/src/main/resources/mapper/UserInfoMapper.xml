@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoushiyou.dao.core.UserInfoDao">
+    <resultMap id="BaseResultMap" type="com.zoushiyou.model.core.UserInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="parentId" property="parentId" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="sortNum" property="sortNum" jdbcType="INTEGER"/>
+        <result column="is_Enable" property="is_Enable" jdbcType="INTEGER"/>
+        <result column="is_Delete" property="is_Delete" jdbcType="INTEGER"/>
+        <result column="ownerId" property="ownerId" jdbcType="BIGINT"/>
+        <result column="createId" property="createId" jdbcType="BIGINT"/>
+        <result column="updateId" property="updateId" jdbcType="BIGINT"/>
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="passWord" property="passWord" jdbcType="VARCHAR"/>
+        <result column="salt" property="salt" jdbcType="VARCHAR"/>
+        <result column="is_Male" property="is_Male" jdbcType="INTEGER"/>
+        <result column="phoneNum" property="phoneNum" jdbcType="VARCHAR"/>
+        <result column="roleId" property="roleId" jdbcType="BIGINT"/>
+        <result column="deptId" property="deptId" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, parentId, version, code, name, remarks, sortNum, is_Enable, is_Delete, ownerId,
+    createId, updateId, createTime, updateTime, passWord, salt,is_Male, phoneNum, roleId, deptId
+  </sql>
+    <insert id="insertOne" parameterType="com.zoushiyou.model.core.UserInfo">
+    insert into tb_userinfo (id, parentId, version,
+      code, name, remarks,
+      sortNum, is_Enable, is_Delete,
+      ownerId, createId, updateId,
+      createTime, updateTime, passWord,
+      is_Male, phoneNum, roleId,
+      deptId,salt)
+    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{version,jdbcType=INTEGER},
+      #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR},
+      #{sortNum,jdbcType=INTEGER}, #{is_Enable,jdbcType=BIT}, #{is_Delete,jdbcType=BIT},
+      #{ownerId,jdbcType=BIGINT}, #{createId,jdbcType=BIGINT}, #{updateId,jdbcType=BIGINT},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{passWord,jdbcType=VARCHAR},
+      #{is_Male,jdbcType=BIT}, #{phoneNum,jdbcType=VARCHAR}, #{roleId,jdbcType=BIGINT},
+      #{deptId,jdbcType=BIGINT},#{salt,jdbcType=VARCHAR})
+  </insert>
+    <update id="updateOne" parameterType="com.zoushiyou.model.core.UserInfo">
+    update tb_userinfo
+    set parentId = #{parentId,jdbcType=BIGINT},
+      version = version+1,
+      code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      sortNum = #{sortNum,jdbcType=INTEGER},
+      is_Enable = #{is_Enable,jdbcType=BIT},
+      is_Delete = #{is_Delete,jdbcType=BIT},
+      ownerId = #{ownerId,jdbcType=BIGINT},
+      updateId = #{updateId,jdbcType=BIGINT},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      passWord = #{passWord,jdbcType=VARCHAR},
+      is_Male = #{is_Male,jdbcType=BIT},
+      phoneNum = #{phoneNum,jdbcType=VARCHAR},
+      roleId = #{roleId,jdbcType=BIGINT},
+      deptId = #{deptId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="deleteOne" parameterType="java.lang.Long">
+       update tb_userinfo set is_Delete = 1 where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="findOne" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select <include refid="Base_Column_List"/>  from tb_userinfo where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="findAll" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List" /> from tb_userinfo
+        where is_Delete=0 <if test="params!=null">${params}</if>
+        order by sortNum
+    </select>
+    <select id="findByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List"/>  from tb_userinfo
+        where code = #{username,jdbcType=VARCHAR}
+    </select>
+</mapper>

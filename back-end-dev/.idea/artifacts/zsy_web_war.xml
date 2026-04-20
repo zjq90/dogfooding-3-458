@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="zsy-web:war">
+    <output-path>$PROJECT_DIR$/zsy-web/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>zsy-web</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="zsy-web.war">
+      <element id="artifact" artifact-name="zsy-web:war exploded" />
+    </root>
+  </artifact>
+</component>
