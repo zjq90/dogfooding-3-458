@@ -1,0 +1,103 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: zsy-springboot
+  
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:db_test;DB_CLOSE_DELAY=-1;MODE=MySQL
+    username: sa
+    password: 
+    druid:
+      initial-size: 2
+      min-idle: 5
+      max-active: 50
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall,slf4j
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        login-username: admin
+        login-password: admin
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 10000
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true
+  
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      continue-on-error: true
+  
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 50MB
+  
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.zoushiyou.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: assign_id
+      logic-delete-field: isDelete
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+pagehelper:
+  helper-dialect: h2
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+fileupload:
+  dir: D:\\fileupload
+
+jwt:
+  secret: zsy-jwt-secret-key
+  expire-time: 86400000
+
+logging:
+  level:
+    com.zoushiyou: debug
+    org.springframework.web: info
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
