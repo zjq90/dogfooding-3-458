@@ -1,0 +1,175 @@
+CREATE TABLE IF NOT EXISTS tb_deptinfo (
+  id BIGINT PRIMARY KEY NOT NULL,
+  parent_id BIGINT DEFAULT NULL,
+  version INT DEFAULT 1,
+  code VARCHAR(50) DEFAULT NULL,
+  name VARCHAR(50) DEFAULT NULL,
+  remarks VARCHAR(150) DEFAULT NULL,
+  sort_num INT DEFAULT 1,
+  is_enable INT DEFAULT 1,
+  is_delete INT DEFAULT 0,
+  owner_id BIGINT DEFAULT NULL,
+  create_id BIGINT NOT NULL,
+  update_id BIGINT DEFAULT NULL,
+  create_time TIMESTAMP NOT NULL,
+  update_time TIMESTAMP DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tb_funcinfo (
+  id BIGINT PRIMARY KEY NOT NULL,
+  parent_id BIGINT DEFAULT NULL,
+  version INT DEFAULT 1,
+  code VARCHAR(50) DEFAULT NULL,
+  name VARCHAR(50) DEFAULT NULL,
+  remarks VARCHAR(150) DEFAULT NULL,
+  sort_num INT DEFAULT 1,
+  is_enable INT DEFAULT 1,
+  is_delete INT DEFAULT 0,
+  owner_id BIGINT DEFAULT NULL,
+  create_id BIGINT NOT NULL,
+  update_id BIGINT DEFAULT NULL,
+  create_time TIMESTAMP NOT NULL,
+  update_time TIMESTAMP DEFAULT NULL,
+  route_path VARCHAR(150) DEFAULT NULL,
+  style_name VARCHAR(150) DEFAULT NULL,
+  level_val INT DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tb_roleinfo (
+  id BIGINT PRIMARY KEY NOT NULL,
+  parent_id BIGINT DEFAULT NULL,
+  version INT DEFAULT 1,
+  code VARCHAR(50) DEFAULT NULL,
+  name VARCHAR(50) DEFAULT NULL,
+  remarks VARCHAR(150) DEFAULT NULL,
+  sort_num INT DEFAULT 1,
+  is_enable INT DEFAULT 1,
+  is_delete INT DEFAULT 0,
+  owner_id BIGINT DEFAULT NULL,
+  create_id BIGINT NOT NULL,
+  update_id BIGINT DEFAULT NULL,
+  create_time TIMESTAMP NOT NULL,
+  update_time TIMESTAMP DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tb_rolejoinfunc (
+  id BIGINT PRIMARY KEY NOT NULL,
+  parent_id BIGINT DEFAULT NULL,
+  version INT DEFAULT 1,
+  code VARCHAR(50) DEFAULT NULL,
+  name VARCHAR(50) DEFAULT NULL,
+  remarks VARCHAR(150) DEFAULT NULL,
+  sort_num INT DEFAULT 1,
+  is_enable INT DEFAULT 1,
+  is_delete INT DEFAULT 0,
+  owner_id BIGINT DEFAULT NULL,
+  create_id BIGINT NOT NULL,
+  update_id BIGINT DEFAULT NULL,
+  create_time TIMESTAMP NOT NULL,
+  update_time TIMESTAMP DEFAULT NULL,
+  role_id BIGINT DEFAULT NULL,
+  func_id BIGINT DEFAULT NULL,
+  level_val INT DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tb_student (
+  id BIGINT PRIMARY KEY NOT NULL,
+  parent_id BIGINT DEFAULT NULL,
+  version INT DEFAULT 1,
+  code VARCHAR(50) DEFAULT NULL,
+  name VARCHAR(50) DEFAULT NULL,
+  remarks VARCHAR(150) DEFAULT NULL,
+  sort_num INT DEFAULT 1,
+  is_enable INT DEFAULT 1,
+  is_delete INT DEFAULT 0,
+  owner_id BIGINT DEFAULT NULL,
+  create_id BIGINT NOT NULL,
+  update_id BIGINT DEFAULT NULL,
+  create_time TIMESTAMP NOT NULL,
+  update_time TIMESTAMP DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tb_syslogs (
+  id BIGINT PRIMARY KEY NOT NULL,
+  parent_id BIGINT DEFAULT NULL,
+  version INT DEFAULT 1,
+  code VARCHAR(50) DEFAULT NULL,
+  name VARCHAR(50) DEFAULT NULL,
+  remarks VARCHAR(150) DEFAULT NULL,
+  sort_num INT DEFAULT 1,
+  is_enable INT DEFAULT 1,
+  is_delete INT DEFAULT 0,
+  owner_id BIGINT DEFAULT NULL,
+  create_id BIGINT NOT NULL,
+  update_id BIGINT DEFAULT NULL,
+  create_time TIMESTAMP NOT NULL,
+  update_time TIMESTAMP DEFAULT NULL,
+  operer_type INT DEFAULT NULL,
+  operer_content VARCHAR(450) DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tb_quartzjob (
+  id BIGINT PRIMARY KEY NOT NULL,
+  parent_id BIGINT DEFAULT NULL,
+  version INT DEFAULT 1,
+  code VARCHAR(50) DEFAULT NULL,
+  name VARCHAR(50) DEFAULT NULL,
+  remarks VARCHAR(150) DEFAULT NULL,
+  sort_num INT DEFAULT 1,
+  is_enable INT DEFAULT 1,
+  is_delete INT DEFAULT 0,
+  owner_id BIGINT DEFAULT NULL,
+  create_id BIGINT NOT NULL,
+  update_id BIGINT DEFAULT NULL,
+  create_time TIMESTAMP NOT NULL,
+  update_time TIMESTAMP DEFAULT NULL,
+  job_group VARCHAR(50) DEFAULT NULL,
+  job_status INT DEFAULT NULL,
+  job_cron VARCHAR(50) DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tb_userinfo (
+  id BIGINT PRIMARY KEY NOT NULL,
+  parent_id BIGINT DEFAULT NULL,
+  version INT DEFAULT 1,
+  code VARCHAR(50) DEFAULT NULL,
+  name VARCHAR(50) DEFAULT NULL,
+  remarks VARCHAR(150) DEFAULT NULL,
+  sort_num INT DEFAULT 1,
+  is_enable INT DEFAULT 1,
+  is_delete INT DEFAULT 0,
+  owner_id BIGINT DEFAULT NULL,
+  create_id BIGINT NOT NULL,
+  update_id BIGINT DEFAULT NULL,
+  create_time TIMESTAMP NOT NULL,
+  update_time TIMESTAMP DEFAULT NULL,
+  pass_word VARCHAR(150) DEFAULT NULL,
+  salt VARCHAR(36) DEFAULT NULL,
+  is_male INT DEFAULT NULL,
+  phone_num VARCHAR(15) DEFAULT NULL,
+  role_id BIGINT DEFAULT NULL,
+  dept_id BIGINT DEFAULT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_userinfo_code ON tb_userinfo(code);
+
+CREATE TABLE IF NOT EXISTS tb_attachments (
+  id BIGINT PRIMARY KEY NOT NULL,
+  parent_id BIGINT DEFAULT NULL,
+  version INT DEFAULT 1,
+  code VARCHAR(50) DEFAULT NULL,
+  name VARCHAR(50) DEFAULT NULL,
+  remarks VARCHAR(150) DEFAULT NULL,
+  sort_num INT DEFAULT 1,
+  is_enable INT DEFAULT 1,
+  is_delete INT DEFAULT 0,
+  owner_id BIGINT DEFAULT NULL,
+  create_id BIGINT NOT NULL,
+  update_id BIGINT DEFAULT NULL,
+  create_time TIMESTAMP NOT NULL,
+  update_time TIMESTAMP DEFAULT NULL,
+  fk_type INT DEFAULT NULL,
+  fk_pk_id BIGINT DEFAULT NULL,
+  suffix VARCHAR(20) DEFAULT NULL,
+  stream_data BLOB DEFAULT NULL
+);
